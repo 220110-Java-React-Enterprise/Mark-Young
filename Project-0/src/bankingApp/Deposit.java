@@ -3,6 +3,8 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// deposits money in chosen owned account
+// persists through database but also stored in local BankAccountData instance
 public class Deposit extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -12,10 +14,15 @@ public class Deposit extends View {
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
     CustomArrayList<Integer> accountIDList = new CustomArrayList<>();
 
+    // constructor
     public Deposit(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow of depositing into an account
+    // reads user's accounts from database
+    // accepts and validates account ID and deposit amount from user
+    // returns to user's homepage if all goes well
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
@@ -100,6 +107,7 @@ public class Deposit extends View {
         }
     }
 
+    // pulling static showAccounts() method from another class
     void displayAccounts(BankAccountData bacctd) {
         UserHome.showAccounts(bacctd);
     }

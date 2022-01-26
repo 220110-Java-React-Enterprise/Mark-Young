@@ -3,6 +3,8 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// adds another user as holder of one of user's accounts
+// persists in local instance and database
 public class JointAccounts extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -14,10 +16,15 @@ public class JointAccounts extends View {
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
     CustomArrayList<Integer> accountIDList = new CustomArrayList<>();
 
+    // constructor
     public JointAccounts(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow of adding user/ joining accounts
+    // user picks an account
+    // verify login info about other user
+    // update local instance and database
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
@@ -150,6 +157,7 @@ public class JointAccounts extends View {
         }
     }
 
+    // calling method from another class for DRY principle
     void displayAccounts(BankAccountData bacctd) {
         UserHome.showAccounts(bacctd);
     }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 // of this object. Do this by making the constructor private, and
 // having a public method which invokes constructor if needed. We
 // abstract the viewer away from instantiation
-
+// Kyle showed us this, don't need to document
 public class ViewManager {
     private static ViewManager viewManager;
     private boolean running;

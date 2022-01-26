@@ -3,6 +3,7 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// withdraw money from a chosen account
 public class Withdraw extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -12,10 +13,15 @@ public class Withdraw extends View {
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
     CustomArrayList<Integer> accountIDList = new CustomArrayList<>();
 
+    // constructor
     public Withdraw(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow to withdraw from account
+    // accept and validate account ID
+    // ensure there are enough funds to draw from
+    // update local instance and database
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
@@ -101,6 +107,8 @@ public class Withdraw extends View {
             return;
         }
     }
+
+    // call method from another class
     void displayAccounts(BankAccountData bacctd) {
         UserHome.showAccounts(bacctd);
     }

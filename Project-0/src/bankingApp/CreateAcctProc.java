@@ -3,16 +3,22 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// creates new bank account
+// persists through database but also stored in local BankAccountData instance
 public class CreateAcctProc extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
     String entry;
     Integer createAcctTries;
 
+    // constructor
     public CreateAcctProc(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow of Creating an account
+    // asks for account type, and creates account in BankAccountData instance and account table
+    // returns user to homepage if all goes well
     @Override
     public void renderView() {
         sc = viewManager.getScanner();

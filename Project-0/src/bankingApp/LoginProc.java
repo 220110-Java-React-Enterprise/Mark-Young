@@ -3,6 +3,7 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// logs a user into their homepage, where they can create and update accounts
 public class LoginProc extends View {
     Scanner sc;
     Integer loginTries;
@@ -11,10 +12,15 @@ public class LoginProc extends View {
     Boolean wrongLogin;
     ViewManager viewManager = ViewManager.getViewManager();
 
+    // constructor
     public LoginProc(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow for logging in
+    // takes in email, which is unique, so pulls exactly zero or one rows of userData from database
+    // waits for user to confirm username and password
+    // takes user to their homepage if all goes well
     @Override
     public void renderView() {
         sc = viewManager.getScanner();

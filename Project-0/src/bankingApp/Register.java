@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.regex.*;
 import static bankingApp.ViewManager.quitWord;
 
+// creates user account and ID in database
 public class Register extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -15,10 +16,12 @@ public class Register extends View {
     static CustomArrayList allRegisterItems = new CustomArrayList<>(
             "first name", "last name", "username", "password", "re-enter password", "email address", "re-enter email address");
 
+    // constructor
     public Register(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // validates that given input is a name
     public boolean validName(String userInput) {
         if (userInput.equals("")) {
             return false;
@@ -32,6 +35,7 @@ public class Register extends View {
         return true;
     }
 
+    // validates that given input is a username meeting given requirements
     public boolean validUsername(String userInput) {
         if (userInput.equals("")) {
             return false;
@@ -74,6 +78,11 @@ public class Register extends View {
         return p.matcher(userInput).matches();
     }
 
+    // workflow to register
+    // through seven steps:
+    // first name, last name, username
+    // password, confirm password
+    // email, confirm email
     @Override
     public void renderView() {
         sc = viewManager.getScanner();

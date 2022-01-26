@@ -1,5 +1,7 @@
 package bankingApp;
 
+// POJO for storing user data
+// also contains static method for displaying user ID
 public class UserData {
     private Integer userID;
 
@@ -93,6 +95,7 @@ public class UserData {
         this.email = email;
     }
 
+    // displays user ID in an elevated manner
     public static String displayUserID(Integer id) {
         if (id < 1000) {
             if (id < 100) {

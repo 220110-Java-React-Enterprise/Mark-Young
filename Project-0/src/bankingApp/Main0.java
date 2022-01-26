@@ -1,5 +1,7 @@
 package bankingApp;
 
+// starts up the whole application, by getting viewManager, and associating that viewManager with all views
+// then running the transfer of views, until exit called
 public class Main0 {
     public static void main(String[] args) {
         ViewManager viewManager = ViewManager.getViewManager();

@@ -3,6 +3,7 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// removes an account from memory
 public class CloseAccount extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -13,10 +14,15 @@ public class CloseAccount extends View {
     CustomArrayList<Integer> listOfAccounts = new CustomArrayList<>();
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
 
+    // constructor
     public CloseAccount(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow to delete account
+    // expects and validates account number
+    // then deletes respective account
+    // returns uesr to homepage if all goes well
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
@@ -86,6 +92,7 @@ public class CloseAccount extends View {
         }
     }
 
+    // calls on static showAccounts function in UserHome class
     static void listAccounts(BankAccountData bacctd) {
         UserHome.showAccounts(bacctd);
     }

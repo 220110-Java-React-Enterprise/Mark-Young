@@ -1,5 +1,11 @@
 package bankingApp;
 
+// this is a POJO storing account data
+// gets user from userID stored in UserData POJO
+// perhaps most important object is myAccountList, which contains all account data associated with the user
+// data in myAccountList is: accountID, userID, balance, accountType, userID2 (for joint accounts)
+// also contains the static methods displayCurrency() and displayAccountID()
+// which are used to elevate UI presentation
 public class BankAccountData {
     private Double balance;
     private Integer userID;
@@ -112,6 +118,8 @@ public class BankAccountData {
         this.accountID = accountID;
     }
 
+    // input: money amount
+    // return: string that looks better
     public static String displayCurrency(Double d) {
         Double newD = d*10000;
         Long newD2 = Math.round(newD);
@@ -133,6 +141,8 @@ public class BankAccountData {
         return "$" + newD2 + result;
     }
 
+    // helper function for displayCurrency()
+    // how to ensure placement of the zeroes that might go missing when modulo-ing
     public static String thousandToString(long k) {
         // k must be less than a thousand
         if (k < 10) {
@@ -144,6 +154,8 @@ public class BankAccountData {
         }
     }
 
+    // helper function for displayCurrency()
+    // how to ensure placement of the zeroes that might go missing when modulo-ing
     public static String hundredToString(long k) {
         // k must be less than a thousand
         if (k < 10) {
@@ -153,6 +165,8 @@ public class BankAccountData {
         }
     }
 
+    // input: accountID
+    // return: string that looks better
     public static String displayAccountID(Integer id) {
         if (id < 1000) {
             if (id < 100) {

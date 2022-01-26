@@ -2,12 +2,19 @@ package bankingApp;
 
 import java.sql.*;
 
+// tied to DataSourceCRUD interface
+// executes create, read, update, delete
+// well actually i haven't used the delete method anywhere else in the project, but it's available at least
 public class UserRepo implements DataSourceCRUD<UserData> {
     private final Connection connection;
     public UserRepo() {
         connection = ConnectionMgr.getConnection();
     }
 
+    // input: UserData instance
+    // return: same instance
+    // inserts data into database
+    // pulls generated user ID
     @Override
     public UserData create(UserData model) {
         try {
@@ -39,6 +46,9 @@ public class UserRepo implements DataSourceCRUD<UserData> {
         return null;
     }
 
+    // input: UserData instance
+    // return: same instance with modifications
+    // reads user data from database based on email (uniqueness is required)
     @Override
     public UserData readEmail(UserData model) {
         try {
@@ -65,6 +75,9 @@ public class UserRepo implements DataSourceCRUD<UserData> {
         return null;
     }
 
+    // input: UserData instance
+    // return: same instance with updates
+    // updates database
     @Override
     public UserData update(UserData model) {
         try {
@@ -86,6 +99,9 @@ public class UserRepo implements DataSourceCRUD<UserData> {
         return model;
     }
 
+    // input: user ID
+    // return: none
+    // deletes user from database
     @Override
     public void delete(Integer id) {
         try {

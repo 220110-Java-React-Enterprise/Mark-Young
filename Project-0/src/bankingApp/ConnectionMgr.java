@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
 
+// establishes connection to AWS database through MariaDB
+// uses my credentials given in a .properties file
+// all shown by Kyle so I don't feel the need to document too much
 public class ConnectionMgr {
     private static ConnectionMgr connectionMgr;
     private static Connection connection;

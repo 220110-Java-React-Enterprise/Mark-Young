@@ -4,12 +4,28 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Calendar;
 
+// this whole class is tied to the BankAcctCRUD interface
+// executes Create, Read, Update, Delete
+// specifically in this case:
+// Create Account  or  Update Joint User
+// Read Accounts
+// Withdraw/Deposit/Transfer
+// Delete Account
+// and View transaction History
 public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
     private final Connection connection;
     public BankAccountRepo() {
         connection = ConnectionMgr.getConnection();
     }
 
+    // used in CreateAcctProc class
+    // createAccount takes in a BankAccountData instance
+    // and returns the same instance with some modifications
+    // accesses AWS database
+    // grabs generated account ID
+    // inserts the data in account database
+    // and adds action to transaction database
+    // also makes changes to the instance's accountList and accountIDList
     public BankAccountData createAccount(BankAccountData model) {
         try {
             String sql = "INSERT INTO bankAccountData (userID, balance, accountType) VALUES (?,?,?)";
@@ -74,6 +90,12 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         return null;
     };
 
+    // most important method besides render/navigate in this project
+    // used at the start of nearly every view to grab starting data
+    // input: BankAccountData instance
+    // returns a list of accounts with balance, account type, etc.
+    // grab data from database based on userID
+    // write data into given instance
     @Override
     public CustomArrayList<CustomArrayList<Object>> readAccount(BankAccountData model) {
         try {
@@ -116,6 +138,10 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         return null;
     }
 
+    // for use in JointAccounts class
+    // input: BankAccountData instance
+    // return: same instance, unless SQL error occurs, then return null
+    // updates instance and database with new joint user
     public BankAccountData updateJointUser(BankAccountData model) {
         try {
             String sql = "UPDATE bankAccountData SET userID2 = ? WHERE accountID = ?";
@@ -148,6 +174,10 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         return null;
     }
 
+    // used in Deposit screen
+    // input: BankAccountData instance and the amount to deposit
+    // return: none
+    // updates instance, account table, and transaction table
     public void deposit(BankAccountData model, Double d) {
         // id, userID, balance, type, userID2
         Integer temp1 = model.getToAccountID();
@@ -192,6 +222,10 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         }
     };
 
+    // used in Withdraw screen
+    // input: BankAccountData instance and the amount to withdraw
+    // return: none
+    // updates instance, account table, and transaction table
     public void withdraw(BankAccountData model, Double d) {
         // also enter into Transactions data
         // id, userID, balance, type, userID2
@@ -239,6 +273,11 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         }
     };
 
+    // used in Close Account screen
+    // input: BankAccountData instance
+    // return: none
+    // updates instance and transaction table
+    // deletes account from account table
     @Override
     public void deleteAccount(BankAccountData model) {
         try {
@@ -287,13 +326,15 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
             temp2.remove(indexDelete);
             model.setMyAccountIDList(temp2);
 
-
-
         } catch (SQLException e) {
             System.out.println("failed. We had trouble connecting.");
         }
     }
 
+    // used in View History screen
+    // input: BankAccountData instance with specified account ID
+    // return: none
+    // prints out transactions for given ID with proper currency notation in the UI
     @Override
     public void viewHistory(BankAccountData model)  {
         try {
@@ -318,6 +359,8 @@ public class BankAccountRepo implements BankAcctCRUD<BankAccountData> {
         }
     }
 
+    // used in transfer screen
+    // combines withdraw and deposit functions
     @Override
     public void transfer(BankAccountData model, Double d)  {
         withdraw(model, d);

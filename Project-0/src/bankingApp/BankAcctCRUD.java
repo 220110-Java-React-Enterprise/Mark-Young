@@ -1,5 +1,6 @@
 package bankingApp;
 
+// interface blueprint for BankAccountRepo
 public interface BankAcctCRUD<T> {
     public T createAccount(T t);
     public CustomArrayList<CustomArrayList<Object>> readAccount(T t);

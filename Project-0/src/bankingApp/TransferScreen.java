@@ -3,6 +3,7 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// transfer money between accounts
 public class TransferScreen extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -14,10 +15,14 @@ public class TransferScreen extends View {
     CustomArrayList<Integer> accountIDList = new CustomArrayList<>();
     Double entryNumber;
 
+    // constructor
     public TransferScreen(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // asks user for two accounts: fromAccount and toAccount
+    // makes sure there is money available to pull
+    // then commits transfer
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
@@ -126,6 +131,8 @@ public class TransferScreen extends View {
             }
         }
     }
+
+    // calls method from another class
     void displayAccounts(BankAccountData bacctd) {
         UserHome.showAccounts(bacctd);
     }

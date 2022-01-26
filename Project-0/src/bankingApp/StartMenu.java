@@ -3,14 +3,18 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// start screen where you can decide whether to register as a new user or log in
 public class StartMenu extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
 
+    // constructor
     public StartMenu(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // display start screen
+    // and navigate to given screen
     @Override
     public void renderView() {
         sc = viewManager.getScanner();

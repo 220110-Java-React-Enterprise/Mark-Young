@@ -3,16 +3,21 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// user's homepage
+// displays accounts and balances
+// gateway to create account, deposit/withdraw/transfer, join accounts, etc
 public class UserHome extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
     CustomArrayList<Integer> accountIDList = new CustomArrayList<>();
 
+    // constructor
     public UserHome(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // displays user's homepage
     @Override
     public void renderView() {
         sc = viewManager.getScanner();

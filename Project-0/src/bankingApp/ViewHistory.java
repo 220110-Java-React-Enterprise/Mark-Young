@@ -3,6 +3,7 @@ package bankingApp;
 import java.util.Scanner;
 import static bankingApp.ViewManager.quitWord;
 
+// user can view transaction history of a chosen account
 public class ViewHistory extends View {
     Scanner sc;
     ViewManager viewManager = ViewManager.getViewManager();
@@ -12,10 +13,15 @@ public class ViewHistory extends View {
     Integer entryNumber;
     CustomArrayList<CustomArrayList<Object>> accountList = new CustomArrayList<>();
 
+    // constructor
     public ViewHistory(String name, ViewManager viewManager) {
         super(name, viewManager);
     }
 
+    // workflow to display transactions
+    // accepts and validates account ID
+    // prints out transactions
+    // waits for user to move back to homepage
     @Override
     public void renderView() {
         sc = viewManager.getScanner();
